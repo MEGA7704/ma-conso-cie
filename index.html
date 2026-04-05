@@ -60,7 +60,7 @@
     }
 
     .topbar-inner{
-      max-width:1320px;
+      max-width:100%;
       margin:auto;
       padding:14px 16px;
       display:flex;
@@ -110,7 +110,7 @@
     }
 
     .container{
-      max-width:1320px;
+      max-width:100%;
       margin:auto;
       position:relative;
       z-index:2;
@@ -512,7 +512,7 @@
     }
 
     .site-footer-inner{
-      max-width:1320px;
+      max-width:100%;
       margin:auto;
       padding:12px 16px;
       text-align:center;
@@ -780,7 +780,21 @@
         color:#000;
       }
     }
-  </style>
+  
+@media print{
+  .print-legal{
+    display:block !important;
+    position:fixed;
+    bottom:10px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:10px;
+    color:#000;
+  }
+}
+
+</style>
 </head>
 <body>
 
@@ -843,14 +857,18 @@
       <div class="hero-top">
 
           </div>
-          <h1>
-Analyse intelligente de <span>consommation énergétique</span><br>
-<span style="color:#16d9c7;">Clarté. Précision. Décision.</span>
-</h1>
+          <h1 style="text-align:center;
+    color:#ffd700;
+    font-size:2.6rem;
+    font-weight:900;
+    letter-spacing:1px;
+    text-shadow:0 0 20px rgba(255,215,0,0.4);">
+    Analyse intelligente de consommation énergétique
+    </h1>
           <p>
-            Comparez votre recharge précédente et votre recharge actuelle afin d’obtenir
+            <p style="text-align:center;max-width:900px;margin:auto;">Comparez votre recharge précédente et votre recharge actuelle afin d’obtenir
             des statistiques fiables, une estimation de durée, une date probable de fin
-            et un rapport propre à imprimer.
+            et un rapport propre à imprimer.</p>
           </p>
         </div>
 
@@ -1135,5 +1153,11 @@ Analyse intelligente de <span>consommation énergétique</span><br>
     });
 
   </script>
+
+<div class="print-legal" style="display:none;">
+⚠️ Ce document est fourni à titre informatif uniquement. MEGA SERVICES SARL U n’est pas affilié à la CIE.
+Ces données ne peuvent être utilisées à des fins juridiques.
+</div>
+
 </body>
 </html>
