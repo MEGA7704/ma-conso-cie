@@ -23,17 +23,20 @@
     html{scroll-behavior:smooth}
 
     body{
-      font-family:Arial, Helvetica, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(255,212,0,0.08), transparent 28%),
-        radial-gradient(circle at top right, rgba(22,217,199,0.10), transparent 30%),
-        linear-gradient(135deg, #041216 0%, #082126 45%, #0d3138 100%);
-      min-height:100vh;
-      padding:110px 16px 110px;
-      position:relative;
-      overflow-x:hidden;
-    }
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,215,0,0.25), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(255,230,120,0.20), transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(255,215,0,0.15), transparent 50%),
+    linear-gradient(135deg, #020808 0%, #0a1f22 40%, #0f2d32 100%);
+
+  min-height:100vh;
+  padding:110px 16px 110px;
+  position:relative;
+  overflow-x:hidden;
+}
 
     body::before{
       content:"";
@@ -233,18 +236,21 @@
       gap:22px;
     }
 
-    .card{
-      border-radius:28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)),
-        rgba(8,29,34,0.82);
-      backdrop-filter:blur(12px);
-      border:1px solid rgba(255,255,255,0.10);
-      box-shadow:var(--shadow);
-      padding:24px;
-      position:relative;
-      overflow:hidden;
-    }
+     .card{
+  border-radius:28px;
+  padding:24px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+    rgba(8,29,34,0.85);
+
+  border:1px solid rgba(255,215,0,0.15);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.45),
+    0 0 25px rgba(255,215,0,0.08);
+
+  backdrop-filter:blur(12px);
+}
 
     .card::before{
       content:"";
@@ -653,6 +659,389 @@
       }
     }
 
+
+
+    /* BOUTON DON FLOTTANT */
+    .floating-don-btn{
+      position:fixed;
+      right:22px;
+      bottom:24px;
+      z-index:6400;
+      border:none;
+      cursor:pointer;
+      border-radius:999px;
+      padding:16px 22px;
+      font-size:0.98rem;
+      font-weight:900;
+      letter-spacing:0.2px;
+      color:#1b2226;
+      background:linear-gradient(135deg, #fff4ad, #ffd400, #ffec7a);
+      box-shadow:
+        0 14px 34px rgba(255,212,0,0.34),
+        0 0 24px rgba(255,212,0,0.22);
+      transition:transform .22s ease, box-shadow .22s ease;
+    }
+
+    .floating-don-btn:hover{
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:
+        0 18px 40px rgba(255,212,0,0.38),
+        0 0 28px rgba(255,212,0,0.26);
+    }
+
+    .floating-don-btn span{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    /* POPUP DON */
+
+    .btn-don{
+      background:linear-gradient(135deg, #fff3a0, #ffd400);
+      color:#1b2226;
+      box-shadow:0 10px 26px rgba(255,212,0,0.25);
+    }
+
+    .btn-don:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 32px rgba(255,212,0,0.32);
+    }
+
+    .don-modal{
+      position:fixed;
+      inset:0;
+      z-index:6500;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:rgba(1,10,12,0.80);
+      backdrop-filter:blur(8px);
+    }
+
+    .don-modal.open{
+      display:flex;
+    }
+
+    .don-card{
+      max-height:90vh;
+      overflow:auto;
+
+      width:min(820px, 100%);
+      border-radius:30px;
+      padding:26px;
+      background:
+        linear-gradient(135deg, rgba(255,212,0,0.10), rgba(22,217,199,0.04)),
+        rgba(8,29,34,0.97);
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 30px 70px rgba(0,0,0,0.45);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .don-card::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto 0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,212,0,0.8), transparent);
+    }
+
+    .don-head{
+      justify-content:space-between;
+
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      margin-bottom:18px;
+    }
+
+    .don-icon{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.35rem;
+      font-weight:900;
+      color:#171b1d;
+      background:linear-gradient(135deg, var(--gold2), var(--gold));
+      box-shadow:0 0 22px rgba(255,212,0,0.25);
+      flex:0 0 auto;
+    }
+
+    .don-title{
+      font-size:1.3rem;
+      font-weight:800;
+      color:#fff;
+      margin-bottom:4px;
+    }
+
+    .don-sub{
+      color:var(--muted);
+      line-height:1.65;
+      font-size:0.95rem;
+    }
+
+    .don-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:16px;
+      margin-top:10px;
+    }
+
+    .don-box{
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+      border-radius:22px;
+      padding:18px;
+    }
+
+    .don-box h3{
+      color:#fff;
+      font-size:1.05rem;
+      margin-bottom:8px;
+    }
+
+    .don-tag{
+      display:inline-block;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:0.82rem;
+      font-weight:800;
+      margin-bottom:12px;
+      color:var(--gold);
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,212,0,0.18);
+    }
+
+    .don-line{
+      color:#eef7f9;
+      line-height:1.75;
+      font-size:0.95rem;
+      word-break:break-word;
+    }
+
+    .don-value{
+      display:block;
+      margin-top:8px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#fff3a0;
+      font-weight:800;
+    }
+
+    .don-note{
+      margin-top:16px;
+      padding:14px 16px;
+      border-left:4px solid var(--gold);
+      border-radius:16px;
+      background:rgba(255,212,0,0.08);
+      color:#f9f1c9;
+      line-height:1.7;
+      font-size:0.93rem;
+    }
+
+    .don-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+
+    .don-close{
+      border:none;
+      background:rgba(255,255,255,0.07);
+      color:#fff;
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      font-size:1.05rem;
+      font-weight:900;
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+
+    .don-top-left{
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+    }
+
+    .don-summary{
+      margin-top:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+      border-radius:22px;
+      padding:18px;
+    }
+
+    .don-summary-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:12px;
+    }
+
+    .don-mini{
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+      border-radius:18px;
+      padding:14px;
+    }
+
+    .don-mini-label{
+      color:var(--muted);
+      font-size:0.82rem;
+      margin-bottom:6px;
+    }
+
+    .don-mini-value{
+      color:#fff;
+      font-weight:800;
+      line-height:1.5;
+    }
+
+    .don-box.primary{
+      border-color:rgba(255,212,0,0.18);
+      background:
+        linear-gradient(135deg, rgba(255,212,0,0.09), rgba(22,217,199,0.03)),
+        rgba(255,255,255,0.03);
+    }
+
+    .copy-row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .copy-btn{
+      border:none;
+      cursor:pointer;
+      border-radius:12px;
+      padding:11px 14px;
+      font-size:0.88rem;
+      font-weight:800;
+      color:#1b2226;
+      background:linear-gradient(135deg, #fff2a1, #ffd400);
+      box-shadow:0 8px 18px rgba(255,212,0,0.18);
+    }
+
+    .wave-link-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      border-radius:12px;
+      padding:11px 14px;
+      font-size:0.88rem;
+      font-weight:800;
+      color:#062126;
+      background:linear-gradient(135deg, #21ead7, #16d9c7);
+      box-shadow:0 8px 18px rgba(22,217,199,0.18);
+    }
+
+    .don-help{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#e8f5f8;
+      line-height:1.7;
+      font-size:0.93rem;
+    }
+
+
+    .amount-input-wrap{
+      margin-top:12px;
+    }
+
+    .amount-input{
+      width:100%;
+      height:52px;
+      border-radius:15px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.97);
+      color:#082126;
+      padding:0 15px;
+      font-size:1rem;
+      font-weight:800;
+      outline:none;
+    }
+
+    .amount-input:focus{
+      border-color:rgba(22,217,199,0.85);
+      box-shadow:0 0 0 4px rgba(22,217,199,0.12);
+    }
+
+    .qr-box{
+      margin-top:14px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.05);
+      border-radius:20px;
+      padding:16px;
+    }
+
+    .qr-box img{
+      width:220px;
+      height:220px;
+      max-width:100%;
+      background:#fff;
+      padding:10px;
+      border-radius:16px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.18);
+      object-fit:contain;
+    }
+
+    .payment-link-box{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#fff3a0;
+      font-weight:800;
+      line-height:1.6;
+      word-break:break-all;
+    }
+
+    @media (max-width: 980px){
+      .floating-don-btn{
+        right:16px;
+        bottom:18px;
+        padding:14px 18px;
+        font-size:0.92rem;
+      }
+
+      .don-summary-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+
+    @media (max-width: 980px){
+      .don-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media print{
+      .don-modal{
+        display:none !important;
+      }
+    }
+
+
     /* HEADER IMPRESSION */
     .print-header{
       display:none;
@@ -794,6 +1183,27 @@
   }
 }
 
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,215,0,0.18), transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(255,215,0,0.12), transparent 40%);
+  pointer-events:none;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  bottom:-150px;
+  right:-150px;
+  width:400px;
+  height:400px;
+  background:radial-gradient(circle, rgba(255,215,0,0.25), transparent 70%);
+  pointer-events:none;
+}
 </style>
 </head>
 <body>
@@ -1009,6 +1419,68 @@
     </div>
   </div>
 
+
+
+  <div class="don-modal" id="donModal">
+    <div class="don-card">
+      <div class="don-head">
+        <div class="don-top-left">
+          <div class="don-icon">♥</div>
+          <div>
+            <div class="don-title">Commande • Paiement • Validation</div>
+            <div class="don-sub">
+              Soutenez l’application avec un don rapide. Paiement accepté via
+              <strong>Wave CI</strong> ou <strong>Wave CI</strong>.
+            </div>
+          </div>
+        </div>
+        <button class="don-close" onclick="fermerPopupDon()">✕</button>
+      </div>
+
+      <div class="don-grid">
+        <div class="don-box primary" style="grid-column:1 / -1;">
+          <div class="don-tag">Paiement Wave CI</div>
+          <h3>Générateur de lien de paiement Wave</h3>
+
+          <div class="don-line">
+            
+
+          <div class="amount-input-wrap">
+            <label for="donAmount" style="display:block;margin-bottom:8px;color:#bcd3d8;font-weight:700;">Montant du don (FCFA)</label>
+            <input class="amount-input" type="number" id="donAmount" min="100" step="1" value="100" placeholder="Entrez le montant">
+          </div>
+
+          
+    <div class="copy-row" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+        <button class="copy-btn" onclick="genererLienWave()">Générer le lien</button>
+        
+    </div>
+    
+
+          <div class="payment-link-box" id="waveGeneratedLink" style="display:none;">
+            https://pay.wave.com/m/M_ci_Enx-2JNAklk-/c/ci/?amount=0
+          </div>
+
+          
+            <img id="waveQrImage" alt="Code QR Wave" src="">
+          </div>
+        </div>
+      </div>
+
+      <div class="don-help">
+        Saisissez le montant souhaité, générez le lien Wave, puis scannez le code QR ou cliquez directement sur le bouton de paiement.
+      </div>
+
+      <div class="don-actions">
+        <button class="btn-secondary" onclick="fermerPopupDon()">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="floating-don-btn" onclick="ouvrirPopupDon()" aria-label="Faire un don">
+    <span>💛 1 Don - 100 F</span>
+  </button>
+
   <footer class="site-footer">
     <div class="site-footer-inner">
       <strong>MEGA SERVICES SARL U</strong><br>
@@ -1037,6 +1509,54 @@
         document.getElementById("legalGate").style.display = "none";
         document.body.classList.remove("app-disabled");
       }
+    }
+
+
+
+    const WAVE_BASE_URL = "https://pay.wave.com/m/M_ci_Enx-2JNAklk-/c/ci/?amount=";
+
+    function genererQrDepuisLien(lien) {
+      const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=" + encodeURIComponent(lien);
+      document.getElementById("waveQrImage").src = qrUrl;
+    }
+
+    function genererLienWave() {
+      const amountInput = document.getElementById("donAmount");
+      let montant = parseInt(amountInput.value || "0", 10);
+
+      if (!Number.isFinite(montant) || montant <= 0) {
+        alert("Veuillez saisir un montant valide.");
+        amountInput.focus();
+        return;
+      }
+
+      const lien = WAVE_BASE_URL + montant;
+      // ouverture automatique
+      window.open(lien, "_blank"); document.getElementById("wavePayLink").href = lien;
+      document.getElementById("resumeAmount").textContent = montant;
+      document.getElementById("waveGeneratedLink").textContent = lien;
+      document.getElementById("waveGeneratedLink").style.display = "block";
+      document.getElementById("wavePayLink").style.display = "inline-flex";
+      document.getElementById("wavePayLink").href = lien;
+      
+    }
+
+    function ouvrirPopupDon() {
+      document.getElementById("donModal").classList.add("open");
+    }
+
+    function fermerPopupDon() {
+      document.getElementById("donModal").classList.remove("open");
+    }
+
+
+    function copierTexte(elementId) {
+      const texte = document.getElementById(elementId).textContent.trim();
+      navigator.clipboard.writeText(texte).then(function () {
+        alert("Copié : " + texte);
+      }).catch(function () {
+        alert("Impossible de copier automatiquement. Veuillez copier manuellement.");
+      });
     }
 
     function formatDateFr(dateObj) {
@@ -1150,6 +1670,11 @@
 
     window.addEventListener("DOMContentLoaded", function () {
       verifierAvertissement();
+      genererLienWave();
+      const donAmount = document.getElementById("donAmount");
+      if (donAmount) {
+        donAmount.addEventListener("input", genererLienWave);
+      }
     });
 
   </script>
