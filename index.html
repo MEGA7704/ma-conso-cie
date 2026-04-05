@@ -523,6 +523,136 @@
 
     .site-footer strong{color:#fff}
 
+
+    /* POPUP MISE EN GARDE OBLIGATOIRE */
+    .legal-gate{
+      position:fixed;
+      inset:0;
+      z-index:6000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:rgba(1,10,12,0.78);
+      backdrop-filter:blur(8px);
+    }
+
+    .legal-card{
+      width:min(760px, 100%);
+      max-height:88vh;
+      overflow:auto;
+      border-radius:28px;
+      padding:24px;
+      background:
+        linear-gradient(135deg, rgba(255,212,0,0.08), rgba(22,217,199,0.04)),
+        rgba(8,29,34,0.97);
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 30px 70px rgba(0,0,0,0.45);
+      position:relative;
+    }
+
+    .legal-card::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto 0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,212,0,0.8), transparent);
+    }
+
+    .legal-top{
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      margin-bottom:16px;
+    }
+
+    .legal-icon{
+      width:52px;
+      height:52px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.3rem;
+      font-weight:900;
+      color:#141a1d;
+      background:linear-gradient(135deg, var(--gold2), var(--gold));
+      box-shadow:0 0 22px rgba(255,212,0,0.22);
+      flex:0 0 auto;
+    }
+
+    .legal-title{
+      font-size:1.28rem;
+      font-weight:800;
+      color:#fff;
+      margin-bottom:5px;
+    }
+
+    .legal-sub{
+      color:var(--muted);
+      line-height:1.65;
+      font-size:0.95rem;
+    }
+
+    .legal-box{
+      margin-top:14px;
+      padding:18px;
+      border-radius:20px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#eef7f9;
+      line-height:1.75;
+      font-size:0.96rem;
+    }
+
+    .legal-box strong{
+      color:#fff;
+    }
+
+    .legal-list{
+      margin-top:10px;
+      padding-left:18px;
+    }
+
+    .legal-list li{
+      margin-bottom:8px;
+    }
+
+    .legal-note{
+      margin-top:14px;
+      padding:14px 16px;
+      border-left:4px solid var(--gold);
+      border-radius:16px;
+      background:rgba(255,212,0,0.08);
+      color:#f9f1c9;
+      line-height:1.7;
+      font-size:0.93rem;
+    }
+
+    .legal-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      margin-top:18px;
+    }
+
+    .btn-danger-soft{
+      background:rgba(255,255,255,0.08);
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.10);
+    }
+
+    .app-disabled{
+      overflow:hidden;
+    }
+
+    @media print{
+      .legal-gate{
+        display:none !important;
+      }
+    }
+
     /* HEADER IMPRESSION */
     .print-header{
       display:none;
@@ -666,6 +796,46 @@
       <div class="topbar-badge">PRODUIT • MEGA SERVICES SARL </div>
     </div>
   </header>
+
+
+  <div class="legal-gate" id="legalGate">
+    <div class="legal-card">
+      <div class="legal-top">
+        <div class="legal-icon">!</div>
+        <div>
+          <div class="legal-title">Mise en garde importante</div>
+          <div class="legal-sub">
+            Lecture et acceptation obligatoires avant utilisation de l’application.
+          </div>
+        </div>
+      </div>
+
+      <div class="legal-box">
+        Le présent outil de suivi et d’analyse des recharges d’énergie est fourni
+        <strong>à titre strictement informatif et indicatif</strong>.
+        Les statistiques, estimations et projections générées sont basées uniquement
+        sur les données saisies par l’utilisateur.
+        Elles ne constituent <strong>ni des données officielles, ni des données certifiées,
+        ni des preuves contractuelles</strong>.
+        <ul class="legal-list">
+          <li>Ce produit <strong>n’est en aucun cas affilié, lié ou approuvé par la CIE</strong> ou par toute autre entité du secteur énergétique.</li>
+          <li>Il <strong>ne remplace pas</strong> les relevés, factures ou informations officielles des structures compétentes.</li>
+          <li>L’utilisateur <strong>ne pourra en aucun cas se baser sur ces statistiques</strong> dans un cadre juridique, administratif ou contentieux contre la compagnie d’électricité ou toute autre entité.</li>
+          <li>L’utilisation de cette application se fait <strong>sous la seule responsabilité de l’utilisateur</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="legal-note">
+        En cliquant sur <strong>« J’accepte et j’entre »</strong>, vous reconnaissez avoir lu,
+        compris et accepté intégralement cette mise en garde.
+      </div>
+
+      <div class="legal-actions">
+        <button class="btn-danger-soft" onclick="refuserAcces()">Quitter</button>
+        <button class="btn-primary" onclick="accepterAvertissement()">J’accepte et j’entre</button>
+      </div>
+    </div>
+  </div>
 
   <div class="container">
 
@@ -827,6 +997,28 @@
   </footer>
 
   <script>
+
+    function accepterAvertissement() {
+      localStorage.setItem("mega_services_legal_ack", "ok");
+      document.getElementById("legalGate").style.display = "none";
+      document.body.classList.remove("app-disabled");
+    }
+
+    function refuserAcces() {
+      window.location.href = "about:blank";
+    }
+
+    function verifierAvertissement() {
+      const accepted = localStorage.getItem("mega_services_legal_ack") === "ok";
+      if (!accepted) {
+        document.getElementById("legalGate").style.display = "flex";
+        document.body.classList.add("app-disabled");
+      } else {
+        document.getElementById("legalGate").style.display = "none";
+        document.body.classList.remove("app-disabled");
+      }
+    }
+
     function formatDateFr(dateObj) {
       if (!(dateObj instanceof Date) || isNaN(dateObj)) return "--";
       return dateObj.toLocaleString("fr-FR", {
@@ -935,6 +1127,11 @@
         <p>Les statistiques seront affichées ici après calcul.</p>
       `;
     }
+
+    window.addEventListener("DOMContentLoaded", function () {
+      verifierAvertissement();
+    });
+
   </script>
 </body>
 </html>
