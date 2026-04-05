@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEGA SERVICES SARL U - Statistiques de Recharge Énergie PRO</title>
+  <style>
+    :root{
+      --gold:#ffd400;
+      --gold2:#ffea7a;
+      --cyan:#16d9c7;
+      --bg:#06171b;
+      --bg2:#0b2228;
+      --panel:rgba(10,31,36,0.84);
+      --panel-soft:rgba(255,255,255,0.04);
+      --line:rgba(255,255,255,0.10);
+      --text:#f5fbfc;
+      --muted:#bcd3d8;
+      --shadow:0 18px 45px rgba(0,0,0,0.35);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,212,0,0.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(22,217,199,0.10), transparent 30%),
+        linear-gradient(135deg, #041216 0%, #082126 45%, #0d3138 100%);
+      min-height:100vh;
+      padding:110px 16px 110px;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size:40px 40px;
+      pointer-events:none;
+      opacity:0.25;
+    }
+
+    .topbar{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:1000;
+      background:
+        linear-gradient(135deg, rgba(255,212,0,0.08), rgba(22,217,199,0.05)),
+        rgba(4,18,22,0.92);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 10px 28px rgba(0,0,0,0.22);
+    }
+
+    .topbar-inner{
+      max-width:1320px;
+      margin:auto;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .company{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .company-mark{
+      width:46px;height:46px;border-radius:15px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;font-size:0.95rem;
+      color:#12181b;
+      background:linear-gradient(135deg, var(--gold2), var(--gold));
+      box-shadow:0 0 20px rgba(255,212,0,0.28);
+    }
+
+    .company-name{
+      font-size:1rem;
+      font-weight:800;
+      color:#fff;
+      letter-spacing:0.3px;
+    }
+
+    .company-sub{
+      font-size:0.82rem;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .topbar-badge{
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:0.84rem;
+      font-weight:800;
+      color:var(--gold);
+      border:1px solid rgba(255,212,0,0.22);
+      background:rgba(255,255,255,0.05);
+      white-space:nowrap;
+    }
+
+    .container{
+      max-width:1320px;
+      margin:auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero{
+      margin-bottom:22px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:
+        linear-gradient(135deg, rgba(255,212,0,0.09), rgba(22,217,199,0.05)),
+        rgba(8,28,33,0.72);
+      backdrop-filter:blur(14px);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:30px 28px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+      pointer-events:none;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      top:-120px;
+      right:-120px;
+      width:280px;
+      height:280px;
+      background:radial-gradient(circle, rgba(255,212,0,0.14), transparent 68%);
+      pointer-events:none;
+    }
+
+    .hero-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
+    }
+
+    .brand-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,212,0,0.25);
+      color:var(--gold);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:0.9rem;
+      font-weight:700;
+      letter-spacing:0.5px;
+      margin-bottom:14px;
+    }
+
+    .brand-dot{
+      width:10px;height:10px;border-radius:50%;
+      background:linear-gradient(135deg, var(--gold), var(--cyan));
+      box-shadow:0 0 14px rgba(255,212,0,0.6);
+    }
+
+    .hero h1{
+      font-size:2.3rem;
+      line-height:1.15;
+      margin-bottom:10px;
+      color:#fff;
+      font-weight:800;
+    }
+
+    .hero h1 span{color:var(--gold)}
+
+    .hero p{
+      max-width:760px;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.7;
+    }
+
+    .hero-side{
+      min-width:250px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .mini-stat{
+      min-width:115px;
+      flex:1;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:14px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .mini-stat .small{
+      color:var(--muted);
+      font-size:0.82rem;
+      margin-bottom:6px;
+    }
+
+    .mini-stat .big{
+      font-size:1.05rem;
+      font-weight:800;
+      color:var(--gold);
+    }
+
+    .main-grid{
+      display:grid;
+      grid-template-columns:1.08fr 0.92fr;
+      gap:22px;
+    }
+
+    .card{
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)),
+        rgba(8,29,34,0.82);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:var(--shadow);
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      left:0; top:0;
+      width:100%; height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,212,0,0.7), transparent);
+      opacity:0.8;
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      right:-70px;
+      bottom:-70px;
+      width:180px;
+      height:180px;
+      background:radial-gradient(circle, rgba(22,217,199,0.08), transparent 70%);
+      pointer-events:none;
+    }
+
+    .card-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+    }
+
+    .card-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .card-icon{
+      width:44px;
+      height:44px;
+      border-radius:15px;
+      background:linear-gradient(135deg, rgba(255,212,0,0.18), rgba(22,217,199,0.18));
+      border:1px solid rgba(255,255,255,0.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--gold);
+      font-size:1.1rem;
+      font-weight:800;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .card-title h2{
+      font-size:1.2rem;
+      color:#fff;
+    }
+
+    .card-title p{
+      color:var(--muted);
+      font-size:0.88rem;
+      margin-top:4px;
+    }
+
+    .section-block{
+      margin-bottom:22px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.03);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .section-label{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:16px;
+      color:var(--cyan);
+      font-weight:800;
+      font-size:0.97rem;
+      letter-spacing:0.2px;
+    }
+
+    .section-label::before{
+      content:"";
+      width:10px;height:10px;border-radius:50%;
+      background:linear-gradient(135deg, var(--gold), var(--cyan));
+      box-shadow:0 0 12px rgba(22,217,199,0.5);
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:14px;
+    }
+
+    .field{display:flex;flex-direction:column}
+    .field.full{grid-column:1 / -1}
+
+    label{
+      margin-bottom:7px;
+      color:var(--muted);
+      font-size:0.92rem;
+      font-weight:700;
+    }
+
+    input{
+      height:52px;
+      border-radius:15px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.97);
+      color:#082126;
+      padding:0 15px;
+      font-size:0.97rem;
+      font-weight:700;
+      outline:none;
+      transition:0.25s ease;
+    }
+
+    input:focus{
+      border-color:rgba(22,217,199,0.85);
+      box-shadow:0 0 0 4px rgba(22,217,199,0.12);
+      transform:translateY(-1px);
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    button{
+      border:none;
+      cursor:pointer;
+      border-radius:15px;
+      font-size:0.95rem;
+      font-weight:800;
+      padding:14px 18px;
+      transition:0.25s ease;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, #ffe55c, #ffd400);
+      color:#1b2226;
+      box-shadow:0 10px 26px rgba(255,212,0,0.22);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 30px rgba(255,212,0,0.28);
+    }
+
+    .btn-secondary{
+      background:linear-gradient(135deg, #21ead7, #16d9c7);
+      color:#062126;
+      box-shadow:0 10px 26px rgba(22,217,199,0.22);
+    }
+
+    .btn-secondary:hover{transform:translateY(-2px)}
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:14px;
+      margin-top:6px;
+    }
+
+    .stat-box{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.01);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px;
+      padding:17px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .stat-box::after{
+      content:"";
+      position:absolute;
+      inset:auto -30px -30px auto;
+      width:90px;
+      height:90px;
+      background:radial-gradient(circle, rgba(255,212,0,0.10), transparent 70%);
+      pointer-events:none;
+    }
+
+    .stat-label{
+      color:var(--muted);
+      font-size:0.88rem;
+      line-height:1.45;
+      margin-bottom:9px;
+    }
+
+    .stat-value{
+      color:#fff;
+      font-size:1.15rem;
+      font-weight:800;
+      line-height:1.35;
+    }
+
+    .stat-box.highlight{
+      border-color:rgba(255,212,0,0.16);
+      background:
+        linear-gradient(180deg, rgba(255,212,0,0.08), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.01);
+    }
+
+    .stat-box.highlight .stat-value{color:var(--gold)}
+
+    .report{
+      margin-top:16px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.03);
+      padding:18px;
+    }
+
+    .report h3{
+      color:var(--cyan);
+      margin-bottom:12px;
+      font-size:1.02rem;
+    }
+
+    .report p{
+      color:#ecf7f9;
+      line-height:1.75;
+      margin-bottom:8px;
+      font-size:0.96rem;
+    }
+
+    .print-note{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:16px;
+      border-left:4px solid var(--gold);
+      background:rgba(255,212,0,0.08);
+      color:#f8f3d4;
+      font-size:0.92rem;
+      line-height:1.6;
+    }
+
+    .footer-strip{
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:0.85rem;
+    }
+
+    .site-footer{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      z-index:999;
+      background:
+        linear-gradient(135deg, rgba(255,212,0,0.06), rgba(22,217,199,0.04)),
+        rgba(4,18,22,0.94);
+      backdrop-filter:blur(12px);
+      border-top:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 -8px 24px rgba(0,0,0,0.20);
+    }
+
+    .site-footer-inner{
+      max-width:1320px;
+      margin:auto;
+      padding:12px 16px;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.84rem;
+      line-height:1.6;
+    }
+
+    .site-footer strong{color:#fff}
+
+    /* HEADER IMPRESSION */
+    .print-header{
+      display:none;
+    }
+
+    @media (max-width: 980px){
+      body{padding-top:124px;padding-bottom:130px}
+      .main-grid{grid-template-columns:1fr}
+      .form-grid,.stats-grid{grid-template-columns:1fr}
+      .hero h1{font-size:1.86rem}
+    }
+
+    @media print{
+      @page{
+        size:auto;
+        margin:14mm;
+      }
+
+      html, body{
+        background:#fff !important;
+        color:#000 !important;
+        padding:0 !important;
+        margin:0 !important;
+      }
+
+      body::before,
+      .topbar,
+      .hero,
+      .form-panel,
+      .site-footer,
+      .print-note,
+      .actions,
+      .footer-strip{
+        display:none !important;
+      }
+
+      .container{
+        max-width:100% !important;
+        margin:0 !important;
+        padding:0 !important;
+      }
+
+      .main-grid{
+        display:block !important;
+      }
+
+      .print-only{
+        display:block !important;
+      }
+
+      .result-card{
+        width:100% !important;
+        display:block !important;
+        background:#fff !important;
+        border:0 !important;
+        box-shadow:none !important;
+        padding:0 !important;
+        margin:0 !important;
+      }
+
+      .result-card::before,
+      .result-card::after{
+        display:none !important;
+      }
+
+      .card-header{
+        margin-bottom:14px !important;
+      }
+
+      .card-icon{
+        border:1px solid #cfcfcf !important;
+        background:#fff !important;
+        color:#000 !important;
+        box-shadow:none !important;
+      }
+
+      .card-title h2,
+      .card-title p,
+      .stat-label,
+      .stat-value,
+      .report h3,
+      .report p{
+        color:#000 !important;
+      }
+
+      .stats-grid{
+        gap:10px !important;
+        page-break-inside:avoid;
+      }
+
+      .stat-box,
+      .report{
+        background:#fff !important;
+        border:1px solid #d9d9d9 !important;
+        box-shadow:none !important;
+        break-inside:avoid;
+      }
+
+      .stat-box.highlight{
+        border:1px solid #c7c7c7 !important;
+      }
+
+      .report{
+        margin-top:12px !important;
+      }
+
+      .print-header{
+        display:block !important;
+        margin:0 0 16px 0;
+        padding-bottom:10px;
+        border-bottom:2px solid #000;
+      }
+
+      .print-header-title{
+        font-size:18px;
+        font-weight:800;
+        color:#000;
+        text-transform:uppercase;
+        letter-spacing:0.3px;
+        margin-bottom:6px;
+      }
+
+      .print-header-sub{
+        font-size:12px;
+        color:#000;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="company">
+        <div class="company-mark">MS</div>
+        <div>
+          <div class="company-name">MEGA SERVICES SARL U</div>
+          <div class="company-sub">Application professionnelle de suivi de recharge énergie</div>
+        </div>
+      </div>
+      <div class="topbar-badge">VERSION FINALE • PREMIUM PRO</div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="brand-badge">
+            <span class="brand-dot"></span>
+            MODULE PREMIUM • ANALYSE ÉNERGIE
+          </div>
+          <h1>Suivi intelligent de <span>recharges énergie</span></h1>
+          <p>
+            Comparez votre recharge précédente et votre recharge actuelle afin d’obtenir
+            des statistiques fiables, une estimation de durée, une date probable de fin
+            et un rapport propre à imprimer.
+          </p>
+        </div>
+
+        <div class="hero-side">
+          <div class="mini-stat">
+            <div class="small">Analyse</div>
+            <div class="big">Auto</div>
+          </div>
+          <div class="mini-stat">
+            <div class="small">Sortie</div>
+            <div class="big">Imprimable</div>
+          </div>
+          <div class="mini-stat">
+            <div class="small">Style</div>
+            <div class="big">PRO</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="main-grid">
+      <section class="card form-panel">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-icon">01</div>
+            <div>
+              <h2>Formulaire de saisie</h2>
+              <p>Renseignez les informations des deux recharges</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-label">Recharge précédente</div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="prevDate">Date et heure</label>
+              <input type="datetime-local" id="prevDate">
+            </div>
+
+            <div class="field">
+              <label for="prevAmount">Montant (FCFA)</label>
+              <input type="number" id="prevAmount" placeholder="Ex : 10000">
+            </div>
+
+            <div class="field">
+              <label for="prevKwh">kWh acheté</label>
+              <input type="number" step="0.1" id="prevKwh" placeholder="Ex : 72.7">
+            </div>
+
+            <div class="field">
+              <label for="prevEnd">Date et fin de l’énergie</label>
+              <input type="datetime-local" id="prevEnd">
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-label">Recharge actuelle</div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="currentDate">Date et heure</label>
+              <input type="datetime-local" id="currentDate">
+            </div>
+
+            <div class="field">
+              <label for="currentAmount">Montant (FCFA)</label>
+              <input type="number" id="currentAmount" placeholder="Ex : 6000">
+            </div>
+
+            <div class="field full">
+              <label for="currentKwh">kWh acheté</label>
+              <input type="number" step="0.1" id="currentKwh" placeholder="Ex : 43.7">
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn-primary" onclick="calculerStats()">Afficher les statistiques</button>
+          <button class="btn-secondary" onclick="viderFormulaire()">Réinitialiser</button>
+        </div>
+      </section>
+
+      <section class="card result-card">
+        <div class="print-header print-only">
+          <div class="print-header-title">Statistique produite par MEGA SERVICES SARL U</div>
+          <div class="print-header-sub">Document de statistiques imprimables généré automatiquement</div>
+        </div>
+
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-icon">02</div>
+            <div>
+              <h2>Statistiques imprimables</h2>
+              <p>Résultats automatiques basés sur la recharge précédente.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-label">Durée de la recharge précédente</div>
+            <div class="stat-value" id="dureePrecedente">--</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Consommation moyenne / jour</div>
+            <div class="stat-value" id="consoJour">--</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Coût moyen / jour</div>
+            <div class="stat-value" id="coutJour">--</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Prix moyen / kWh</div>
+            <div class="stat-value" id="prixKwh">--</div>
+          </div>
+
+          <div class="stat-box highlight">
+            <div class="stat-label">Estimation durée recharge actuelle</div>
+            <div class="stat-value" id="estimationDuree">--</div>
+          </div>
+
+          <div class="stat-box highlight">
+            <div class="stat-label">Date estimée de fin</div>
+            <div class="stat-value" id="dateFinEstimee">--</div>
+          </div>
+        </div>
+
+        <div class="report" id="rapportTexte">
+          <h3>Rapport d’analyse</h3>
+          <p>Les statistiques seront affichées ici après calcul.</p>
+        </div>
+
+        <div class="print-note">
+          Cette vue est optimisée pour une impression propre des résultats et du rapport d’analyse.
+        </div>
+
+        <div class="actions" style="margin-top:16px;">
+          <button class="btn-primary" onclick="window.print()">Imprimer les statistiques</button>
+        </div>
+
+        <div class="footer-strip">
+          <div>Module : Suivi de consommation énergie</div>
+          <div>Niveau d’interface : Premium PRO</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <strong>MEGA SERVICES SARL U</strong><br>
+      RCCM : CI-BKE-2020-B-1150 ; C.C: 2039493 M _ Siège Social : Diabo _ Tél : +225 0777041790 ; Email : megaservicediabo@gmail.com
+    </div>
+  </footer>
+
+  <script>
+    function formatDateFr(dateObj) {
+      if (!(dateObj instanceof Date) || isNaN(dateObj)) return "--";
+      return dateObj.toLocaleString("fr-FR", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
+    function formatNombre(valeur, suffixe = "") {
+      if (isNaN(valeur) || !isFinite(valeur)) return "--";
+      return valeur.toLocaleString("fr-FR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }) + suffixe;
+    }
+
+    function calculerStats() {
+      const prevDate = document.getElementById("prevDate").value;
+      const prevAmount = parseFloat(document.getElementById("prevAmount").value);
+      const prevKwh = parseFloat(document.getElementById("prevKwh").value);
+      const prevEnd = document.getElementById("prevEnd").value;
+
+      const currentDate = document.getElementById("currentDate").value;
+      const currentAmount = parseFloat(document.getElementById("currentAmount").value);
+      const currentKwh = parseFloat(document.getElementById("currentKwh").value);
+
+      if (!prevDate || !prevEnd || isNaN(prevAmount) || isNaN(prevKwh) || !currentDate || isNaN(currentAmount) || isNaN(currentKwh)) {
+        alert("Veuillez remplir correctement tous les champs.");
+        return;
+      }
+
+      const dPrevDate = new Date(prevDate);
+      const dPrevEnd = new Date(prevEnd);
+      const dCurrentDate = new Date(currentDate);
+
+      if (dPrevEnd <= dPrevDate) {
+        alert("La date de fin de l’énergie précédente doit être supérieure à la date de recharge précédente.");
+        return;
+      }
+
+      const dureeMs = dPrevEnd - dPrevDate;
+      const dureeJours = dureeMs / (1000 * 60 * 60 * 24);
+      const dureeHeures = dureeMs / (1000 * 60 * 60);
+
+      const consoJour = prevKwh / dureeJours;
+      const coutJour = prevAmount / dureeJours;
+      const prixKwh = prevAmount / prevKwh;
+
+      const estimationDureeJours = currentKwh / consoJour;
+      const estimationDureeHeures = estimationDureeJours * 24;
+
+      const dateFinEstimee = new Date(dCurrentDate.getTime() + estimationDureeHeures * 60 * 60 * 1000);
+
+      document.getElementById("dureePrecedente").textContent =
+        formatNombre(dureeJours, " jours") + " (" + formatNombre(dureeHeures, " h") + ")";
+
+      document.getElementById("consoJour").textContent =
+        formatNombre(consoJour, " kWh/jour");
+
+      document.getElementById("coutJour").textContent =
+        formatNombre(coutJour, " FCFA/jour");
+
+      document.getElementById("prixKwh").textContent =
+        formatNombre(prixKwh, " FCFA/kWh");
+
+      document.getElementById("estimationDuree").textContent =
+        formatNombre(estimationDureeJours, " jours");
+
+      document.getElementById("dateFinEstimee").textContent =
+        formatDateFr(dateFinEstimee);
+
+      document.getElementById("rapportTexte").innerHTML = `
+        <h3>Rapport d’analyse</h3>
+        <p><strong>Recharge précédente :</strong> vous avez acheté <strong>${formatNombre(prevKwh, " kWh")}</strong> pour un montant de <strong>${formatNombre(prevAmount, " FCFA")}</strong>.</p>
+        <p><strong>Durée observée :</strong> cette recharge a duré environ <strong>${formatNombre(dureeJours, " jours")}</strong>, soit <strong>${formatNombre(dureeHeures, " heures")}</strong>.</p>
+        <p><strong>Consommation moyenne :</strong> votre rythme moyen de consommation est estimé à <strong>${formatNombre(consoJour, " kWh par jour")}</strong>.</p>
+        <p><strong>Coût journalier :</strong> votre dépense moyenne est d’environ <strong>${formatNombre(coutJour, " FCFA par jour")}</strong>.</p>
+        <p><strong>Valeur moyenne du kWh :</strong> le prix moyen ressort à <strong>${formatNombre(prixKwh, " FCFA par kWh")}</strong>.</p>
+        <p><strong>Recharge actuelle :</strong> vous avez acheté <strong>${formatNombre(currentKwh, " kWh")}</strong> pour un montant de <strong>${formatNombre(currentAmount, " FCFA")}</strong>.</p>
+        <p><strong>Projection :</strong> si votre niveau de consommation reste identique, la recharge actuelle pourrait durer environ <strong>${formatNombre(estimationDureeJours, " jours")}</strong>.</p>
+        <p><strong>Date probable de fin :</strong> l’énergie actuelle pourrait prendre fin vers le <strong>${formatDateFr(dateFinEstimee)}</strong>.</p>
+      `;
+    }
+
+    function viderFormulaire() {
+      document.getElementById("prevDate").value = "";
+      document.getElementById("prevAmount").value = "";
+      document.getElementById("prevKwh").value = "";
+      document.getElementById("prevEnd").value = "";
+      document.getElementById("currentDate").value = "";
+      document.getElementById("currentAmount").value = "";
+      document.getElementById("currentKwh").value = "";
+
+      document.getElementById("dureePrecedente").textContent = "--";
+      document.getElementById("consoJour").textContent = "--";
+      document.getElementById("coutJour").textContent = "--";
+      document.getElementById("prixKwh").textContent = "--";
+      document.getElementById("estimationDuree").textContent = "--";
+      document.getElementById("dateFinEstimee").textContent = "--";
+
+      document.getElementById("rapportTexte").innerHTML = `
+        <h3>Rapport d’analyse</h3>
+        <p>Les statistiques seront affichées ici après calcul.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
