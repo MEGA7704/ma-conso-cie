@@ -1204,6 +1204,292 @@ body::after{
   background:radial-gradient(circle, rgba(255,215,0,0.25), transparent 70%);
   pointer-events:none;
 }
+
+    /* OPTIMISATION SMARTPHONE */
+    @media (max-width: 768px){
+      body{
+        padding:88px 10px 100px !important;
+      }
+
+      .topbar-inner{
+        padding:10px 12px !important;
+        gap:10px !important;
+        align-items:center !important;
+      }
+
+      .company{
+        gap:10px !important;
+        width:100% !important;
+      }
+
+      .company-mark{
+        width:40px !important;
+        height:40px !important;
+        border-radius:12px !important;
+      }
+
+      .company-name{
+        font-size:0.92rem !important;
+        line-height:1.2 !important;
+      }
+
+      .company-sub{
+        font-size:0.74rem !important;
+        line-height:1.35 !important;
+      }
+
+      .topbar-badge{
+        width:100% !important;
+        text-align:center !important;
+        padding:9px 12px !important;
+        font-size:0.78rem !important;
+      }
+
+      .hero{
+        padding:20px 14px !important;
+        border-radius:22px !important;
+        margin-bottom:16px !important;
+      }
+
+      .hero-top{
+        display:block !important;
+      }
+
+      .hero h1{
+        font-size:1.42rem !important;
+        line-height:1.3 !important;
+        text-align:center !important;
+        margin-bottom:10px !important;
+      }
+
+      .hero p{
+        font-size:0.92rem !important;
+        line-height:1.65 !important;
+        text-align:center !important;
+        max-width:100% !important;
+      }
+
+      .main-grid{
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        gap:16px !important;
+      }
+
+      .card{
+        padding:16px 14px !important;
+        border-radius:22px !important;
+      }
+
+      .card-header{
+        margin-bottom:16px !important;
+      }
+
+      .card-title{
+        gap:10px !important;
+        align-items:flex-start !important;
+      }
+
+      .card-icon{
+        width:38px !important;
+        height:38px !important;
+        border-radius:12px !important;
+        font-size:0.95rem !important;
+        flex:0 0 auto !important;
+      }
+
+      .card-title h2{
+        font-size:1rem !important;
+        line-height:1.25 !important;
+      }
+
+      .card-title p{
+        font-size:0.8rem !important;
+        line-height:1.45 !important;
+      }
+
+      .section-block{
+        padding:14px !important;
+        border-radius:18px !important;
+        margin-bottom:16px !important;
+      }
+
+      .section-label{
+        font-size:0.9rem !important;
+        margin-bottom:12px !important;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr !important;
+        gap:12px !important;
+      }
+
+      .field.full{
+        grid-column:auto !important;
+      }
+
+      label{
+        font-size:0.88rem !important;
+      }
+
+      input{
+        height:48px !important;
+        font-size:0.95rem !important;
+        padding:0 12px !important;
+      }
+
+      .actions{
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        gap:10px !important;
+      }
+
+      .actions button{
+        width:100% !important;
+      }
+
+      .stats-grid{
+        grid-template-columns:1fr !important;
+        gap:12px !important;
+      }
+
+      .stat-box{
+        padding:14px !important;
+        border-radius:16px !important;
+      }
+
+      .stat-label{
+        font-size:0.84rem !important;
+      }
+
+      .stat-value{
+        font-size:1rem !important;
+        line-height:1.4 !important;
+      }
+
+      .report{
+        padding:14px !important;
+        border-radius:18px !important;
+      }
+
+      .report h3{
+        font-size:0.96rem !important;
+      }
+
+      .report p{
+        font-size:0.9rem !important;
+        line-height:1.65 !important;
+      }
+
+      .print-note{
+        font-size:0.84rem !important;
+        padding:12px 13px !important;
+      }
+
+      .footer-strip{
+        flex-direction:column !important;
+        gap:6px !important;
+        font-size:0.78rem !important;
+      }
+
+      .site-footer{
+        position:static !important;
+        margin-top:16px !important;
+      }
+
+      .site-footer-inner{
+        font-size:0.76rem !important;
+        line-height:1.55 !important;
+        padding:12px 10px !important;
+      }
+
+      .legal-gate,
+      .don-modal{
+        padding:10px !important;
+      }
+
+      .legal-card,
+      .don-card{
+        width:100% !important;
+        max-height:88vh !important;
+        border-radius:22px !important;
+        padding:18px 14px !important;
+      }
+
+      .legal-top,
+      .don-head{
+        gap:10px !important;
+      }
+
+      .legal-icon,
+      .don-icon{
+        width:44px !important;
+        height:44px !important;
+        border-radius:14px !important;
+        font-size:1.05rem !important;
+      }
+
+      .legal-title,
+      .don-title{
+        font-size:1.02rem !important;
+        line-height:1.3 !important;
+      }
+
+      .legal-sub,
+      .don-sub,
+      .legal-box,
+      .legal-note,
+      .don-note,
+      .don-help{
+        font-size:0.88rem !important;
+        line-height:1.65 !important;
+      }
+
+      .legal-actions,
+      .don-actions,
+      .copy-row{
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        gap:10px !important;
+      }
+
+      .copy-btn,
+      .wave-link-btn,
+      .btn-danger-soft,
+      .btn-primary,
+      .btn-secondary{
+        width:100% !important;
+        justify-content:center !important;
+      }
+
+      .floating-don-btn{
+        right:14px !important;
+        bottom:14px !important;
+        padding:13px 16px !important;
+        font-size:0.88rem !important;
+        max-width:calc(100vw - 28px) !important;
+      }
+
+      .payment-link-box{
+        font-size:0.84rem !important;
+      }
+    }
+
+    @media (max-width: 420px){
+      .hero h1{
+        font-size:1.26rem !important;
+      }
+
+      .topbar-badge{
+        font-size:0.74rem !important;
+      }
+
+      .floating-don-btn{
+        font-size:0.82rem !important;
+        padding:12px 14px !important;
+      }
+    }
+
+
 </style>
 </head>
 <body>
@@ -1421,78 +1707,71 @@ body::after{
 
 
 
+  
   <div class="don-modal" id="donModal">
     <div class="don-card">
       <div class="don-head">
         <div class="don-top-left">
           <div class="don-icon">♥</div>
           <div>
-            <div class="don-title">Nous Soutenir</div>
+            <div class="don-title">Paiement Wave</div>
             <div class="don-sub">
-              Soutenez l’application avec un don rapide. Paiement accepté via
-              <strong>Wave CI</strong>.
+              Saisissez le montant de votre don, puis cliquez sur <strong>Générer le lien</strong>.
             </div>
           </div>
         </div>
-        <button class="don-close" onclick="fermerPopupDon()">✕</button>
+        <button class="don-close" type="button" onclick="fermerPopupDon()">✕</button>
       </div>
 
       <div class="don-grid">
         <div class="don-box primary" style="grid-column:1 / -1;">
           <div class="don-tag">Paiement Wave CI</div>
-
-
-          <div class="don-line">
-            
+          <h3>Générateur de lien de paiement</h3>
 
           <div class="amount-input-wrap">
             <label for="donAmount" style="display:block;margin-bottom:8px;color:#bcd3d8;font-weight:700;">Montant du don (FCFA)</label>
             <input class="amount-input" type="number" id="donAmount" min="100" step="1" value="100" placeholder="Entrez le montant">
           </div>
 
-          
-    <div class="copy-row" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-        <button class="copy-btn" onclick="genererLienWave()">Générer le lien</button>
-        
-    </div>
-    
-
-          <div class="payment-link-box" id="waveGeneratedLink" style="display:none;">
-            https://pay.wave.com/m/M_ci_Enx-2JNAklk-/c/ci/?amount=0
+          <div class="copy-row" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+            <button class="copy-btn" type="button" onclick="genererLienWave()">Générer le lien</button>
+<button class="copy-btn" type="button" onclick="payerWave()">Payer</button>
           </div>
 
-          
-            <img id="waveQrImage" alt="Code QR Wave" src="">
-          </div>
+          <div class="payment-link-box" id="waveGeneratedLink" style="display:none;"></div>
         </div>
       </div>
 
       <div class="don-help">
-        Saisissez le montant souhaité, générez le lien Wave, puis scannez le code QR ou valider directement sur votre smartphone.
+        Après génération, le lien de paiement Wave s’affiche ici. Aucun lien ne s’ouvre sans action de l’utilisateur.
       </div>
 
       <div class="don-actions">
-        <button class="btn-secondary" onclick="fermerPopupDon()">Fermer</button>
+        <button class="btn-secondary" type="button" onclick="fermerPopupDon()">Fermer</button>
       </div>
     </div>
   </div>
 
-  <button class="floating-don-btn" onclick="ouvrirPopupDon()" aria-label="Faire un don">
-    <span>💛 Faire 1 Don </span>
+  <button class="floating-don-btn" type="button" onclick="ouvrirPopupDon()" aria-label="Faire un don">
+    <span>💛 1 Don - 100 F</span>
   </button>
+
 
   <footer class="site-footer">
     <div class="site-footer-inner">
-      <strong>Edité par : MEGA SERVICES SARL U</strong><br>
-      RCCM : CI-BKE-2020-B-1150 ; C.C: 2039493 M _ Siège Social : Bouaké/Diabo _ Tél : +225 0777041790 ; Email : megaservicediabo@gmail.com
+      <strong>MEGA SERVICES SARL U</strong><br>
+      RCCM : CI-BKE-2020-B-1150 ; C.C: 2039493 M _ Siège Social : Diabo _ Tél : +225 0777041790 ; Email : megaservicediabo@gmail.com
     </div>
   </footer>
 
+  
   <script>
+    const WAVE_BASE_URL = "https://pay.wave.com/m/M_ci_Enx-2JNAklk-/c/ci/?amount=";
 
     function accepterAvertissement() {
       localStorage.setItem("mega_services_legal_ack", "ok");
-      document.getElementById("legalGate").style.display = "none";
+      const gate = document.getElementById("legalGate");
+      if (gate) gate.style.display = "none";
       document.body.classList.remove("app-disabled");
     }
 
@@ -1502,61 +1781,25 @@ body::after{
 
     function verifierAvertissement() {
       const accepted = localStorage.getItem("mega_services_legal_ack") === "ok";
+      const gate = document.getElementById("legalGate");
+      if (!gate) return;
       if (!accepted) {
-        document.getElementById("legalGate").style.display = "flex";
+        gate.style.display = "flex";
         document.body.classList.add("app-disabled");
       } else {
-        document.getElementById("legalGate").style.display = "none";
+        gate.style.display = "none";
         document.body.classList.remove("app-disabled");
       }
     }
 
-
-
-    const WAVE_BASE_URL = "https://pay.wave.com/m/M_ci_Enx-2JNAklk-/c/ci/?amount=";
-
-    function genererQrDepuisLien(lien) {
-      const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=" + encodeURIComponent(lien);
-      document.getElementById("waveQrImage").src = qrUrl;
-    }
-
-    function genererLienWave() {
-      const amountInput = document.getElementById("donAmount");
-      let montant = parseInt(amountInput.value || "0", 10);
-
-      if (!Number.isFinite(montant) || montant <= 0) {
-        alert("Veuillez saisir un montant valide.");
-        amountInput.focus();
-        return;
-      }
-
-      const lien = WAVE_BASE_URL + montant;
-      // ouverture automatique
-      window.open(lien, "_blank"); document.getElementById("wavePayLink").href = lien;
-      document.getElementById("resumeAmount").textContent = montant;
-      document.getElementById("waveGeneratedLink").textContent = lien;
-      document.getElementById("waveGeneratedLink").style.display = "block";
-      document.getElementById("wavePayLink").style.display = "inline-flex";
-      document.getElementById("wavePayLink").href = lien;
-      
-    }
-
     function ouvrirPopupDon() {
-      document.getElementById("donModal").classList.add("open");
+      const modal = document.getElementById("donModal");
+      if (modal) modal.classList.add("open");
     }
 
     function fermerPopupDon() {
-      document.getElementById("donModal").classList.remove("open");
-    }
-
-
-    function copierTexte(elementId) {
-      const texte = document.getElementById(elementId).textContent.trim();
-      navigator.clipboard.writeText(texte).then(function () {
-        alert("Copié : " + texte);
-      }).catch(function () {
-        alert("Impossible de copier automatiquement. Veuillez copier manuellement.");
-      });
+      const modal = document.getElementById("donModal");
+      if (modal) modal.classList.remove("open");
     }
 
     function formatDateFr(dateObj) {
@@ -1612,7 +1855,6 @@ body::after{
 
       const estimationDureeJours = currentKwh / consoJour;
       const estimationDureeHeures = estimationDureeJours * 24;
-
       const dateFinEstimee = new Date(dCurrentDate.getTime() + estimationDureeHeures * 60 * 60 * 1000);
 
       document.getElementById("dureePrecedente").textContent =
@@ -1668,16 +1910,38 @@ body::after{
       `;
     }
 
+    function payerWave() {
+      const linkBox = document.getElementById("waveGeneratedLink");
+      if (!linkBox || !linkBox.textContent) {
+        alert("Veuillez d'abord générer le lien.");
+        return;
+      }
+      window.open(linkBox.textContent, "_blank");
+    }
+
+    function genererLienWave() {
+      const amountInput = document.getElementById("donAmount");
+      const generatedLink = document.getElementById("waveGeneratedLink");
+      let montant = parseInt((amountInput && amountInput.value) || "0", 10);
+
+      if (!Number.isFinite(montant) || montant <= 0) {
+        alert("Veuillez saisir un montant valide.");
+        if (amountInput) amountInput.focus();
+        return;
+      }
+
+      const lien = WAVE_BASE_URL + montant;
+      if (generatedLink) {
+        generatedLink.textContent = lien;
+        generatedLink.style.display = "block";
+      }
+    }
+
     window.addEventListener("DOMContentLoaded", function () {
       verifierAvertissement();
-      genererLienWave();
-      const donAmount = document.getElementById("donAmount");
-      if (donAmount) {
-        donAmount.addEventListener("input", genererLienWave);
-      }
     });
-
   </script>
+
 
 <div class="print-legal" style="display:none;">
 ⚠️ Ce document est fourni à titre informatif uniquement. MEGA SERVICES SARL U n’est pas affilié à la CIE.
